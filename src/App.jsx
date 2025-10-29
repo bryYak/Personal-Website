@@ -7,7 +7,7 @@ import Contact from "./pages/Contact";
 
 export default function App() {
   return (
-    <Router basename="/bryanyakimisky">
+    <Router basename="/">
       <div className="bg-white dark:bg-black min-h-screen text-gray-900 dark:text-gray-100 transition">
         <Navbar />
         <Routes>
