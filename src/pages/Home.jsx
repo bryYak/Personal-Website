@@ -1,19 +1,33 @@
 import GraphBackground from "../components/Graph";
-export default function Home() {
-    return (
-        <div >
-            <div className="fixed inset-0 z-0 pointer-events-none">
-                <GraphBackground />
-            </div>
-            <div className="relative z-10 flex flex-col items-center justify-center min-h-screen">
-                <div className='p-8 text-center'>
-                    <div className='bg-black text-3xl font-bold font-mono p-4'><AnimatedHeader /></div>
-                </div>
-            </div>
-        </div>
-    );
-}
 import { useState, useEffect } from "react";
+import clsx from "clsx";
+
+export default function Home() {
+  return (
+    <div className="w-full flex flex-col">
+
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+
+        <div className="absolute inset-0 z-0 pointer-events-none">
+          <GraphBackground />
+        </div>
+
+
+        <div className="relative z-10 text-center p-8">
+          <div className="bg-black text-3xl font-bold font-mono p-4 text-white">
+            <AnimatedHeader />
+          </div>
+        </div>
+      </section>
+
+      {/* CARD SECTION (normal background) */}
+      <section className="relative z-20 bg-zinc-900 py-20">
+        <CardBar />
+      </section>
+    </div>
+  );
+}
+
 
 function AnimatedHeader() {
   const titles = [
@@ -54,35 +68,59 @@ function AnimatedHeader() {
         setDeleting(false);
         setIndex((prev) => (prev + 1) % titles.length);
       }
-    }, deleting ? 50 : 120);
+    }, deleting ? 50 : 50);
 
     return () => clearTimeout(timeout);
   }, [subIndex, deleting, index]);
 
   return (
-    <h2 className="text-xl sm:text-2xl md:text-3xl font-mono text-gray-400 dark:text-gray-300 mt-2">
+    <div>
       {titles[index].substring(0, subIndex)}
       <span className={`${blink ? "opacity-100" : "opacity-0"}`}>|</span>
-    </h2>
+    </div>
   );
 }
 
 
-function Card({ title, description }) {
-    return (
-        <a href="my-portfolio/projects" className="block max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm hover:bg-gray-100 dark:bg-gray-800 dark:border-gray-700 dark:hover:bg-gray-700">
-            <h5 className="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{title}</h5>
-            <p className="font-normal text-gray-700 dark:text-gray-400">{description}</p>
-        </a>
-    );
+
+function Card({ title, description, border_color , image_src}) {
+  const borderClass =
+    {
+      pink: "border-fuchsia-500",
+      purple: "border-violet-500",
+      green: "border-emerald-500",
+      red: "border-red-700",
+    }[border_color] || "border-zinc-700";
+
+  return (
+    <a
+      href="my-portfolio/projects"
+      className={clsx(
+        "block w-full p-6 bg-white border-[2px] rounded-xl shadow-md bg-zinc-800 hover:bg-zinc-700 transition-all",
+        borderClass
+      )}
+    >
+      <h5 className="mb-3 text-3xl font-bold tracking-tight text-white">
+        {title}
+      </h5>
+      <p className="text-lg text-gray-400">{description}</p>
+      
+
+      <img class="h-auto max-w-full" src="/images/tb2.png" alt="Image of Tension Board 2 Spray"/>
+
+
+    </a>
+  );
 }
 
 function CardBar() {
-    return (
-        <div className="text-center" >
-            <h2 className="text-2xl font-bold"> Featured Projects</h2>
-            <div className="flex flex-row items-center gap-4 content-center justify-center">
-                <Card title="abc" description="bcd"></Card>
-                <Card title="abc" description="bcd"></Card>
-            </div></div>);
+  return (
+    <div className="text-center px-8">
+      <h2 className="text-2xl font-bold mb-8 text-white">Featured Projects</h2>
+      <div className="flex flex-row items-center gap-8 max-w-8xl mx-auto">
+        <Card title="Tension Board 2 Grade Classifier" description="A custom built neural network to automatically grade climbs for the world's best system board" border_color="pink" />
+        <Card title="My Website" description="bcd" border_color="green" />
+      </div>
+    </div>
+  );
 }
