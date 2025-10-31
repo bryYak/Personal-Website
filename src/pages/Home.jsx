@@ -1,6 +1,7 @@
 import GraphBackground from "../components/Graph";
 import { useState, useEffect } from "react";
 import clsx from "clsx";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 export default function Home() {
   return (
@@ -21,7 +22,7 @@ export default function Home() {
       </section>
 
       {/* CARD SECTION (normal background) */}
-      <section className="relative z-20 bg-zinc-900 py-20">
+      <section className="relative z-20 bg-zinc-900 py-10">
         <CardBar />
       </section>
     </div>
@@ -83,7 +84,7 @@ function AnimatedHeader() {
 
 
 
-function Card({ title, description, border_color , image_src}) {
+function Card({ title, description, border_color, image_src, page_src }) {
   const borderClass =
     {
       pink: "border-fuchsia-500",
@@ -94,21 +95,26 @@ function Card({ title, description, border_color , image_src}) {
 
   return (
     <a
-      href="my-portfolio/projects"
+      href={page_src}
       className={clsx(
-        "block w-full p-6 bg-white border-[2px] rounded-xl shadow-md bg-zinc-800 hover:bg-zinc-700 transition-all",
+        "flex flex-col items-center p-6 border-[2px] rounded-xl flex-1 shadow-md bg-zinc-800 h-full hover:brightness-125 transition-all duration-300 hover:shadow-xl hover:scale-105",
         borderClass
       )}
     >
-      <h5 className="mb-3 text-3xl font-bold tracking-tight text-white">
+      <h5 className="mb-3 text-2xl font-bold tracking-tight text-white text-center">
         {title}
       </h5>
-      <p className="text-lg text-gray-400">{description}</p>
-      
+      <p className="text-lg text-gray-400 mb-4 text-center">{description}</p>
 
-      <img class="h-auto max-w-full" src="/images/tb2.png" alt="Image of Tension Board 2 Spray"/>
-
-
+      {image_src && (
+        <div className="w-full max-w-xs aspect-square mb-4">
+          <img
+            className="w-full h-full object-cover rounded-lg transition-transform transform border-2 border-zinc-900"
+            src={image_src}
+            alt={`Image of ${title}`}
+          />
+        </div>
+      )}
     </a>
   );
 }
@@ -117,10 +123,18 @@ function CardBar() {
   return (
     <div className="text-center px-8">
       <h2 className="text-2xl font-bold mb-8 text-white">Featured Projects</h2>
-      <div className="flex flex-row items-center gap-8 max-w-8xl mx-auto">
-        <Card title="Tension Board 2 Grade Classifier" description="A custom built neural network to automatically grade climbs for the world's best system board" border_color="pink" />
-        <Card title="My Website" description="bcd" border_color="green" />
+      <div className="place-items-center grid grid-cols-1 sm:grid-cols-3 gap-8 max-w-8xl mx-auto">
+        <div/>
+        <Card
+          title="Tension Board 2 Grade Classifier"
+          description="A custom built neural network to automatically grade climbs for the world's best system board"
+          border_color="pink"
+          image_src="/images/tb2.png"
+          page_src="/projects/tb2"
+        />
+        <div/>  
       </div>
     </div>
   );
 }
+// The divs before and after card are place holders until we have more projects.
