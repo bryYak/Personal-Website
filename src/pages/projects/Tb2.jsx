@@ -1,0 +1,1 @@
+export default function Tb2() {return (<div className='p-8'><h1 className='text-2xl font-bold mb-4'>TB2</h1><p>Gotta add description</p></div>);}
