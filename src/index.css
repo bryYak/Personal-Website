@@ -6,8 +6,9 @@
     p {
     @apply mb-4 text-lg text-neutral-300 leading-relaxed; /* Add your desired default classes here */
     }
-
     h2 {
     @apply mb-4 mt-4 text-3xl font-extrabold leading-tight text-white
     }
+
+
 }
