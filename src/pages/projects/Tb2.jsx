@@ -1,5 +1,6 @@
-import { Header, Lead, Image, Post} from "./Template";
+import { Header, Lead, Image, Code } from "./Template";
 import '../../index.css';
+
 
 
 const Tb2 = () => {
@@ -52,12 +53,13 @@ function Data() {
             <h2>Data Preperation</h2>
             <p>To begin with data preparation, we need to gather our dataset.
                 To accomplish this I used the <a className="text-blue-500 underline" href="https://github.com/lemeryfertitta/BoardLib">BoardLib</a> python library.
-                This library downloads the TB2 dataset as a <b>relational sqlite database</b>. It also has the options
+                This library downloads the TB2 dataset as a <b>relational sqlite database</b>. It also has options
                 for downloading datasets for other boards, namely Kilter and Moon.
             </p>
-            <Image src="/images/tb2/tb2sqlite.PNG" caption="TB2 SQLite DB"/>
+            <Image src="/images/tb2/tb2sqlite.PNG" caption="TB2 SQLite DB" />
+            <h3>Data Collection</h3>
             <p>
-                To access the data for climbs, we need to primarily look at the climb_stats, and climbs tables. Climbs stats contains information, such as benchmark_difficulty, display_difficulty, difficulty_average, (all floats) ascensionist_count, and wall_angle. 
+                To access the data for climbs, we need to primarily look at the climb_stats, and climbs tables. Climbs stats contains information, such as benchmark_difficulty, display_difficulty, difficulty_average, (all floats) ascensionist_count, and wall_angle.
                 Climbs contains setter_name, climb_name, description (contains matching info), and frames (contains hold info).
             </p>
             <p>
@@ -70,7 +72,11 @@ function Data() {
 
             </p>
 
-            <Post/>
+            <Code file={"/code/tb2/benchmark_query.md"} />
+            <Code file={"/code/tb2/nonbenchmark_query.md"} />
+
+            <h3>Processing Frames</h3>
+
 
         </section>
     )

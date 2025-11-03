@@ -1,5 +1,5 @@
 ```sql
--- Benchmark Climbs
+-- Non Benchmark Climbs
 SELECT 
 climbs.setter_username, 
 climbs.name, 
@@ -14,6 +14,8 @@ climb_stats.display_difficulty -- Difficulty (float)
 FROM climbs
 INNER JOIN climb_stats
 on climb_stats.climb_uuid = climbs.uuid
-WHERE climb_stats.benchmark_difficulty is not null --Gets Only Classics
+WHERE climb_stats.benchmark_difficulty is  null --Gets non classics
+AND climb_stats.ascensionist_count > 75 -- High ascents
 AND climbs.layout_id = 10 -- Mirror Layout
+AND abs(display_difficulty - difficulty_average) < 0.5 -- Consistent set/user difficulty
 ```
