@@ -4,13 +4,19 @@
 
 @layer base {
     p {
-    @apply mb-4 text-lg text-neutral-300 leading-relaxed; /* Add your desired default classes here */
+        @apply mb-4 text-lg text-neutral-300 leading-relaxed;
     }
+
     h2 {
-    @apply mb-4 mt-4 text-3xl font-extrabold leading-tight text-white
+        @apply mb-4 mt-4 text-3xl font-extrabold leading-tight text-white
     }
+
     h3 {
-    @apply mb-4 mt-4 text-2xl font-bold leading-tight text-white
+        @apply mb-4 mt-4 text-2xl font-bold leading-tight text-white
+    }
+
+    h4 {
+        @apply mb-4 mt-4 text-xl font-bold leading-tight text-white
     }
 
 
